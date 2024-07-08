@@ -23,7 +23,7 @@ def parse_is(html):
         link = data_block.find('span', class_='obj-rate-count-p', recursive=True)
         art['stars'] = int(link.text.strip())
         link = data_block.find('p', class_='public-preview-text-wrap', recursive=True)
-        art['preview'] = link.text.strip()
+        art['preview'] = link.text.strip().replace('\n', ' ')
         data_block2 = data_block.find('p', class_='text-muted desc-article', recursive=True)
         span = data_block2.find('i', class_='fa fa-calendar', recursive=True).parent
         art['date'] = span.text.strip()
