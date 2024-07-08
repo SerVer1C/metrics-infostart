@@ -1,0 +1,40 @@
+name: 'Infometrics-articles'
+branding:
+  icon: 'user'
+  color: 'cyan'
+description: 'Формирование топ-списка статей Инфостарт для моего профиля GitHub'
+inputs:
+  user_id:
+    description: 'Infostart ID'
+    required: true
+  count:
+    description: 'Количество статей с максимальным количеством плюсов'
+    required: true
+    default: '5'
+  readme_file:
+    description: 'Путь к файлу README'
+    required: false
+    default: './README.md'
+  template_file:
+    description: 'Путь к файлу шаблона'
+    required: false
+    default: './template.html'
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Запуск скрипта
+      run: python ${{ github.action_path }}/main.py ${{ inputs.user_id }} ${{ inputs.count }} ${{ inputs.readme_file }} ${{ inputs.template_file }}
+      shell: bash
+    - name: Запись изменений
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_user_name: SerVer1C (bot)
+        commit_user_email: @
+        commit_author: SerVer1C
+        commit_message: Обновление списка топ статей Инфостарт в Readme
