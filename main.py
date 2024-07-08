@@ -69,9 +69,10 @@ def main(args):
                     art['date']
                 )
 
-    res += '\n\n'
-    res += (f':point_right: <h4 style="color: cyan; text-decoration: underline;">'
-            f'<a href="{url}">Полный профиль на Инфостарт</a></h4>')
+    res += '<br><br>'
+    res += (f'| :point_right: | <h4 style="color: cyan">'
+            f'<u><a href="{url}">Полный профиль на Инфостарт</a></u></h4> |'
+            f'|-|-|')
 
     div_is = '<div id="infostart" />'
 
