@@ -84,7 +84,7 @@ def main(args):
 
     if pos_start != -1 and pos_end != -1:
         with open(readme_file, 'w', encoding='utf-8') as f:
-            file = f'{file[:pos_start]}\n{res}\n{file[pos_end + len(div_end) + 1:]}'
+            file = f'{file[:pos_start + len(div_start)]}\n{res}\n{file[pos_end:]}'
             f.write(file)
 
 
