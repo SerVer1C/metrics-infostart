@@ -8,7 +8,8 @@
 
 В свой README.md добавьте следующий блок:
 ```
-<div id="infostart" />
+'<div id="is_start" />'
+'<div id="is_end" />'
 ```
 
 Затем создайте новый экшен в репозитории своего профиля с подобным содержанием yml файла:
@@ -26,7 +27,7 @@ jobs:
       - uses: SerVer1C/metrics-infostart@1.0
         with:
           user_id: '47774' # Infostart ID
-          count: '7' # Количество выводимых статей. Сортировка по кол-ву звёзд.
+          count: '10' # Количество выводимых статей. Сортировка по кол-ву звёзд.
           template_file: './template.html' # Путь к шаблону.
           readme_file: './README.md' # Путь к README файлу.
 ```
