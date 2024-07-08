@@ -70,18 +70,21 @@ def main(args):
                 )
 
     res += '<br><br>'
-    res += (f'| :point_right: | <h4 style="color: cyan">'
-            f'<u><a href="{url}">Полный профиль на Инфостарт</a></u></h4> |'
-            f'|-|-|')
+    res += (f'> | :point_right: | <h4 style="color: cyan"><u><a href="{url}">Полный профиль на Инфостарт</a></u></h4> |'
+            f'> |-|-|')
 
-    div_is = '<div id="infostart" />'
+    div_start = '<div id="is_start" />'
+    div_end = '<div id="is_end" />'
 
     with open(readme_file, 'r', encoding='utf-8') as f:
         file = f.read()
 
-    if file.find(div_is) != -1:
+    pos_start = file.find(div_start)
+    pos_end = file.find(div_end)
+
+    if pos_start != -1 and pos_end != -1:
         with open(readme_file, 'w', encoding='utf-8') as f:
-            file = file.replace(div_is, res)
+            file = f'{file[:pos_start]}\n{res}\n{file[pos_end + len(div_end) + 1:]}'
             f.write(file)
 
 
