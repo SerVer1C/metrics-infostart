@@ -11,14 +11,15 @@ inputs:
     description: 'Количество статей с максимальным количеством плюсов'
     required: true
     default: '5'
-  readme_file:
-    description: 'Путь к файлу README'
-    required: false
-    default: './README.md'
   template_file:
     description: 'Путь к файлу шаблона'
     required: false
     default: './template.html'
+  readme_file:
+    description: 'Путь к файлу README'
+    required: false
+    default: './README.md'
+
 
 runs:
   using: "composite"

@@ -27,8 +27,8 @@ jobs:
         with:
           user_id: '47774' # Infostart ID
           count: '7' # Количество выводимых статей. Сортировка по кол-ву звёзд.
-          readme_file: './README.md' # Путь к README файлу.
           template_file: './template.html' # Путь к шаблону.
+          readme_file: './README.md' # Путь к README файлу.
 ```
 
 ## Параметры шаблона

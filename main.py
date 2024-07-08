@@ -39,10 +39,10 @@ def parse_is(html):
 
 
 def main(args):
-    user_id = args[0]
-    count = args[1]
-    template_file = args[2]
-    readme_file = args[3]
+    user_id = args[1]
+    count = args[2]
+    template_file = args[3]
+    readme_file = args[4]
 
     with open(template_file, 'r') as f:
         template = f.read()
