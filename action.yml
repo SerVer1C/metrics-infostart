@@ -1,7 +1,7 @@
 name: 'Infometrics-articles'
 branding:
   icon: 'user'
-  color: 'cyan'
+  color: 'blue'
 description: 'Формирование топ-списка статей Инфостарт для моего профиля GitHub'
 inputs:
   user_id:
@@ -34,7 +34,7 @@ runs:
     - name: Запись изменений
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        commit_user_name: SerVer1C (bot)
-        commit_user_email: @
-        commit_author: SerVer1C
-        commit_message: Обновление списка топ статей Инфостарт в Readme
+        commit_user_name: SerVer1C
+        commit_user_email: serverxplanet@gmail.com
+        commit_author: SerVer1C (bot)
+        commit_message: Обновление списка топ статей Инфостарт в README.md
