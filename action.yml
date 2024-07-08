@@ -31,7 +31,7 @@ runs:
     - name: Установка зависимостей
       uses: py-actions/py-dependency-install@v4
       with:
-        path: 'requirements.txt'
+        path: ${{ github.action_path }}/requirements.txt
     - name: Запуск скрипта
       run: python ${{ github.action_path }}/main.py ${{ inputs.user_id }} ${{ inputs.count }} ${{ inputs.readme_file }} ${{ inputs.template_file }}
       shell: bash
