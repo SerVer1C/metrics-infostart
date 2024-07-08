@@ -67,10 +67,10 @@ def main(args):
                     art['downloads'],
                     art['comments'],
                     art['date']
-                )
+                ) + '\n'
 
     res += '<br>\n<br>\n'
-    res += f'>:point_right: <h2 style="color: cyan"><a href="{url}">Полный профиль на Инфостарт</a></h2>'
+    res += f':point_right: <h2 style="color: cyan"><a href="{url}">Полный профиль на Инфостарт</a></h2>'
 
     div_start = '<div id="is_start" />'
     div_end = '<div id="is_end" />'
