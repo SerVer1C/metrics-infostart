@@ -9,7 +9,7 @@ SERVER = r'https://infostart.ru'
 def parse_is(html):
     articles = []
 
-    soup = Bs(html, 'lxml')
+    soup = Bs(html, 'html.parser')
     blocks = soup.find_all('div', class_='well clearfix publication-item row')
 
     for block in blocks:
