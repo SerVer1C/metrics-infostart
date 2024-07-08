@@ -34,7 +34,7 @@ runs:
       with:
         path: ${{ github.action_path }}/requirements.txt
     - name: Запуск скрипта
-      run: python ${{ github.action_path }}/main.py ${{ inputs.user_id }} ${{ inputs.count }}
+      run: python ${{ github.action_path }}/main.py ${{ inputs.user_id }} ${{ inputs.count }} ${{ inputs.template_file }} ${{ inputs.readme_file }}
       shell: bash
     - name: Запись изменений
       uses: stefanzweifel/git-auto-commit-action@v5
