@@ -24,10 +24,14 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v4
-    - name: Setup Python
+    - name: Установка Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
+    - name: Установка зависимостей
+      uses: py-actions/py-dependency-install@v4
+      with:
+        path: 'requirements.txt'
     - name: Запуск скрипта
       run: python ${{ github.action_path }}/main.py ${{ inputs.user_id }} ${{ inputs.count }} ${{ inputs.readme_file }} ${{ inputs.template_file }}
       shell: bash
