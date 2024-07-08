@@ -40,7 +40,7 @@ def parse_is(html):
 
 def main(args):
     user_id = args[1]
-    count = args[2]
+    count = int(args[2])
     template_file = args[3]
     readme_file = args[4]
 
