@@ -69,9 +69,9 @@ def main(args):
                     art['date']
                 )
 
-    res += '<br><br>'
-    res += (f'> | :point_right: | <h4 style="color: cyan"><u><a href="{url}">Полный профиль на Инфостарт</a></u></h4> |'
-            f'> |-|-|')
+    res += '<br>\n<br>\n'
+    res += f'> | :point_right: | <h4 style="color: cyan"><u><a href="{url}">Полный профиль на Инфостарт</a></u></h4> |'
+    res += f'\n> |-|-|'
 
     div_start = '<div id="is_start" />'
     div_end = '<div id="is_end" />'
