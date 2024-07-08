@@ -14,11 +14,11 @@ inputs:
   template_file:
     description: 'Путь к файлу шаблона'
     required: false
-    default: './template.html'
+    default: ${{ github.action_path }}/template.html
   readme_file:
     description: 'Путь к файлу README'
     required: false
-    default: './README.md'
+    default: 'README.md'
 
 
 runs:
@@ -34,7 +34,7 @@ runs:
       with:
         path: ${{ github.action_path }}/requirements.txt
     - name: Запуск скрипта
-      run: ls -la && python ${{ github.action_path }}/main.py ${{ inputs.user_id }} ${{ inputs.count }} ${{ inputs.template_file }} ${{ inputs.readme_file }}
+      run: python ${{ github.action_path }}/main.py ${{ inputs.user_id }} ${{ inputs.count }}
       shell: bash
     - name: Запись изменений
       uses: stefanzweifel/git-auto-commit-action@v5
