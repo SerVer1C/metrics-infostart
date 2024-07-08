@@ -23,7 +23,7 @@ def parse_is(html):
         link = data_block.find('span', class_='obj-rate-count-p', recursive=True)
         art['stars'] = int(link.text.strip())
         link = data_block.find('p', class_='public-preview-text-wrap', recursive=True)
-        art['preview'] = link.text.strip().replace('\n', ' ')
+        art['preview'] = link.text.strip().replace('\n', ' ').replace('\r', ' ')
         data_block2 = data_block.find('p', class_='text-muted desc-article', recursive=True)
         span = data_block2.find('i', class_='fa fa-calendar', recursive=True).parent
         art['date'] = span.text.strip()
@@ -83,7 +83,7 @@ def main(args):
 
     if pos_start != -1 and pos_end != -1:
         with open(readme_file, 'w', encoding='utf-8') as f:
-            file = f'{file[:pos_start + len(div_start)]}\n{res}\n{file[pos_end:]}'
+            file = f'{file[:pos_start + len(div_start)]}\n\n{res}\n\n{file[pos_end:]}'
             f.write(file)
 
 
