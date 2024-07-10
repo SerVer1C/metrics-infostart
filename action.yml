@@ -39,7 +39,7 @@ runs:
     - name: Запись изменений
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        commit_user_name: SerVer1C (bot)
+        commit_user_name: SerVer1C
         commit_user_email: serverxplanet@gmail.com
         commit_author: SerVer1C <serverxplanet@gmail.com>
-        commit_message: Обновление списка топ статей Инфостарт в README.md
+        commit_message: Обновление списка топ статей Инфостарт в README.md (action)

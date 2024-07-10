@@ -55,6 +55,7 @@ def main(args):
     articles.sort(key=lambda x: x['stars'], reverse=True)
 
     res = ""
+    res += f"<h3>:trophy: ТОП-{str(count)} моих публикаций на Инфостарте</h3>\n\n"
 
     for art in articles[:count]:
         res += template.format(
@@ -70,7 +71,7 @@ def main(args):
                 ) + '\n'
 
     res += '<br>\n<br>\n'
-    res += f':point_right: <h2 style="color: cyan"><a href="{url}">Полный профиль на Инфостарт</a></h2>'
+    res += f'<h2>:point_right: <a href="{url}">Полный профиль на Инфостарт</a></h2>'
 
     div_start = '<div id="is_start" />'
     div_end = '<div id="is_end" />'
