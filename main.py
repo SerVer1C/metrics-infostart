@@ -52,7 +52,7 @@ def main(args):
     html = response.content.decode('cp1251')
 
     articles = parse_is(html)
-    articles.sort(key=lambda x: x['stars'], reverse=True)
+    articles.sort(key=lambda x: 2000 * x['downloads'] + 1000 * x['stars'] + 100 * x['comments'] + 1 * x['views'], reverse=True)
 
     res = ""
     res += f"<h3>:trophy: ТОП-{str(count)} моих публикаций на Инфостарте</h3>\n\n"
