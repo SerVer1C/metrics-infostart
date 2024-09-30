@@ -1,6 +1,7 @@
 import sys
 import requests
 from bs4 import BeautifulSoup as Bs
+import time
 
 
 SERVER = r'https://infostart.ru'
@@ -47,17 +48,29 @@ def main(args):
     with open(template_file, 'r') as f:
         template = f.read()
 
+    all_articles = []
     url = SERVER + r'/profile/' + str(user_id) + r'/objects/'
-    response = requests.get(url)
-    html = response.content.decode('cp1251')
+    page = 0
+    ajax_data = {'PUBLIC_LIST_AJAX': 1, 'objPage': page}
+    packet_size = 25
+    answer_size = packet_size
 
-    articles = parse_is(html)
-    articles.sort(key=lambda x: 2000 * x['downloads'] + 1000 * x['stars'] + 100 * x['comments'] + 1 * x['views'], reverse=True)
+    while answer_size == packet_size:
+        page += 1
+        ajax_data['objPage'] = page
+        response = requests.post(url, params=ajax_data)
+        html = response.content.decode('cp1251')
+        articles = parse_is(html)
+        answer_size = len(articles)
+        all_articles += articles
+        time.sleep(1)
+
+    all_articles.sort(key=lambda x: 2000 * x['downloads'] + 1000 * x['stars'] + 100 * x['comments'] + 1 * x['views'], reverse=True)
 
     res = ""
     res += f"<h3>:trophy: ТОП-{str(count)} моих публикаций на Инфостарте</h3>\n\n"
 
-    for art in articles[:count]:
+    for art in all_articles[:count]:
         res += template.format(
                     art['img_src'],
                     art['title'],
