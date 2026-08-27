@@ -24,8 +24,6 @@ def get_session():
             print('[INFO] Cookies загружены из переменной окружения')
         except (json.JSONDecodeError, KeyError) as e:
             print(f'[WARNING] Ошибка загрузки cookies из окружения: {e}')
-            print('[INFO] Пробуем извлечь из Chrome-профиля...')
-            _get_cookies_from_chrome(session)
     
     return session
 
