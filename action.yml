@@ -19,7 +19,10 @@ inputs:
     description: 'Путь к файлу README'
     required: false
     default: 'README.md'
-
+  cookies:
+    description: 'Cookies для авторизации (JSON-строка или из secrets)'
+    required: false
+    default: ''
 
 runs:
   using: "composite"
