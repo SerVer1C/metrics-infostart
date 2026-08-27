@@ -84,9 +84,14 @@ def main(args):
         page += 1
         ajax_data['objPage'] = page
         response = session.post(url, params=ajax_data)
+        print(f'[INFO] Page {page}: status={response.status_code}, len={len(response.content)}')
+        if response.status_code != 200:
+            print(f'[ERROR] HTTP {response.status_code}: {response.text[:500]}')
+            break
         html = response.content.decode('cp1251')
         articles = parse_is(html)
         answer_size = len(articles)
+        print(f'[INFO] Page {page}: found {answer_size} articles')
         all_articles += articles
         time.sleep(1)
 
