@@ -7,6 +7,29 @@ import time
 SERVER = r'https://infostart.ru'
 
 
+def get_session():
+    """Создаёт сессию requests с cookies.
+    Cookies берутся из переменной окружения INFOSTART_COOKIES (JSON-строка).
+    """
+    session = requests.Session()
+    
+    cookies_json = os.environ.get('INFOSTART_COOKIES')
+    
+    if cookies_json:
+        # Загружаем cookies из переменной окружения
+        try:
+            cookies_list = json.loads(cookies_json)
+            for cookie in cookies_list:
+                session.cookies.set(cookie['name'], cookie['value'])
+            print('[INFO] Cookies загружены из переменной окружения')
+        except (json.JSONDecodeError, KeyError) as e:
+            print(f'[WARNING] Ошибка загрузки cookies из окружения: {e}')
+            print('[INFO] Пробуем извлечь из Chrome-профиля...')
+            _get_cookies_from_chrome(session)
+    
+    return session
+
+
 def parse_is(html):
     articles = []
 
@@ -45,6 +68,8 @@ def main(args):
     template_file = args[3]
     readme_file = args[4]
 
+    session = get_session()
+
     with open(template_file, 'r') as f:
         template = f.read()
 
@@ -58,7 +83,7 @@ def main(args):
     while answer_size == packet_size:
         page += 1
         ajax_data['objPage'] = page
-        response = requests.post(url, params=ajax_data)
+        response = session.post(url, params=ajax_data)
         html = response.content.decode('cp1251')
         articles = parse_is(html)
         answer_size = len(articles)
