@@ -34,6 +34,8 @@ runs:
       with:
         path: ${{ github.action_path }}/requirements.txt
     - name: Запуск скрипта
+      env:
+        INFOSTART_COOKIES: ${{ inputs.cookies }}
       run: python ${{ github.action_path }}/main.py ${{ inputs.user_id }} ${{ inputs.count }} ${{ github.action_path }}/template.html ${{ inputs.readme_file }}
       shell: bash
     - name: Запись изменений
