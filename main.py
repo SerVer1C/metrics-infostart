@@ -26,7 +26,9 @@ def get_session():
             print('[INFO] Cookies загружены из переменной окружения')
         except (json.JSONDecodeError, KeyError) as e:
             print(f'[WARNING] Ошибка загрузки cookies из окружения: {e}')
-    
+    else:
+        print(f'[WARNING] отсутствует переменная окружения INFOSTART_COOKIES')
+
     return session
 
 
@@ -89,9 +91,19 @@ def main(args):
             print(f'[ERROR] HTTP {response.status_code}: {response.text[:500]}')
             break
         html = response.content.decode('cp1251')
+        
+        # Сохраняем HTML для отладки
+        with open(f'debug_page_{page}.html', 'w', encoding='cp1251') as f:
+            f.write(html)
+        
         articles = parse_is(html)
         answer_size = len(articles)
         print(f'[INFO] Page {page}: found {answer_size} articles')
+        
+        # Проверяем, не страница ли это входа
+        if 'login' in html.lower()[:2000] or 'вход' in html.lower()[:2000]:
+            print('[ERROR] Получена страница входа — cookies недействительны')
+        
         all_articles += articles
         time.sleep(1)
 
