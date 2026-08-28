@@ -1,10 +1,11 @@
 """
 Скрипт для экспорта cookies из Chrome в JSON.
 Использование:
-    python get_cookies.py > cookies.json
+    python export_cookies.py > cookies.json
     
 Затем скопируйте содержимое cookies.json в GitHub Secrets 
-как INFOSTART_COOKIES.
+как INFOSTART_COOKIES в личный репозиторий,
+который использует action для обновления списка статей.
 """
 import os
 import sys
