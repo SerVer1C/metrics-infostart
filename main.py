@@ -23,7 +23,7 @@ def get_session():
             cookies_list = json.loads(cookies_json)
             for cookie in cookies_list:
                 session.cookies.set(cookie['name'], cookie['value'])
-            print('[INFO] Cookies загружены из переменной окружения')
+            pass
         except (json.JSONDecodeError, KeyError) as e:
             print(f'[WARNING] Ошибка загрузки cookies из окружения: {e}')
     else:
@@ -86,23 +86,12 @@ def main(args):
         page += 1
         ajax_data['objPage'] = page
         response = session.post(url, params=ajax_data)
-        print(f'[INFO] Page {page}: status={response.status_code}, len={len(response.content)}')
         if response.status_code != 200:
-            print(f'[ERROR] HTTP {response.status_code}: {response.text[:500]}')
             break
         html = response.content.decode('cp1251')
         
-        # Сохраняем HTML для отладки
-        with open(f'debug_page_{page}.html', 'w', encoding='cp1251') as f:
-            f.write(html)
-        
         articles = parse_is(html)
         answer_size = len(articles)
-        print(f'[INFO] Page {page}: found {answer_size} articles')
-        
-        # Проверяем, не страница ли это входа
-        if 'login' in html.lower()[:2000] or 'вход' in html.lower()[:2000]:
-            print('[ERROR] Получена страница входа — cookies недействительны')
         
         all_articles += articles
         time.sleep(1)
