@@ -23,11 +23,10 @@ def get_session():
             cookies_list = json.loads(cookies_json)
             for cookie in cookies_list:
                 session.cookies.set(cookie['name'], cookie['value'])
-            pass
         except (json.JSONDecodeError, KeyError) as e:
-            print(f'[WARNING] Ошибка загрузки cookies из окружения: {e}')
+            print(f'[WARNING] Ошибка парсинга cookies: {e}')
     else:
-        print(f'[WARNING] отсутствует переменная окружения INFOSTART_COOKIES')
+        print(f'[WARNING] Отсутствует переменная окружения INFOSTART_COOKIES')
 
     return session
 
@@ -85,9 +84,12 @@ def main(args):
     while answer_size == packet_size:
         page += 1
         ajax_data['objPage'] = page
+
         response = session.post(url, params=ajax_data)
         if response.status_code != 200:
+            print(f'[WARNING] Ошибка загрузки страницы. Код ответа: {response.status_code}')
             break
+
         html = response.content.decode('cp1251')
         
         articles = parse_is(html)
